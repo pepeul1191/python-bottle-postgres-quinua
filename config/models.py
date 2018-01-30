@@ -2,9 +2,17 @@
 from sqlalchemy import Table, Column, Integer, String, ForeignKey, Float
 from config.database import Base
 # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
+#id = Column('user_id', Integer, primary_key=True)
+
+class Usuario(Base):
+	__tablename__ = 'usuario'
+	usuario = Column('username', String)
+	contrasenia = Column('password', String)
+
+'''
 class UnidadMedida(Base):
 	__tablename__ = 'unidad_medidas'
-	id = Column(Integer, primary_key=True)
+	id = Column('', Integer, primary_key=True)
 	nombre = Column(String)
 	simbolo = Column(String)
 
@@ -31,3 +39,4 @@ class Sensor(Base):
 	descripcion = Column(String)
 	unidad_medida_id = Column(Integer, ForeignKey('unidad_medidas.id'))
 	estacion_id = Column(Integer, ForeignKey('estaciones.id'))
+'''
