@@ -2,18 +2,12 @@
 # -*- coding: utf-8 -*-
 import json
 from bottle import Bottle, request
-from sqlalchemy.sql import select
-#from config.models import Usuario
-from config.database import engine, session_db, connection
+from models.usuario import usuario_listar
+from config.database import connection
 
 usuario_view = Bottle()
 
 @usuario_view.route('/listar', method='GET')
 def listar():
-  cur = connection.cursor()
-  cur.execute("SELECT * FROM usuario;")
-  rs = cur.fetchall()
-  print(rs)
-  cur.close()
-  connection.close()
+  print(usuario_listar())
   return 'XD'
