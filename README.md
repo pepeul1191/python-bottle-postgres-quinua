@@ -14,11 +14,9 @@ Instalación de dependencias:
 ### Fuentes:
 
 + https://bottlepy.org/docs/dev/
-+ http://www.sqlalchemy.org/
-+ http://docs.sqlalchemy.org/en/latest/orm/mapping_columns.html
-
-Sequel.connect(:adapter=>'sqlite', :database=>File.expand_path('../../../db/db_quinua.db', __FILE__))
-Sequel.connect('postgres://postgres:ulima@168.121.220.36:5432/quinua')
++ http://initd.org/psycopg/docs/usage.html
++ http://initd.org/psycopg/docs/cursor.html#cursor.fetchall
++ https://stackoverflow.com/questions/17262170/bottle-py-enabling-cors-for-jquery-ajax-requests
 
 Thanks/Credits
 
