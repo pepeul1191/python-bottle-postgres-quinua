@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from bottle import Bottle, run, HTTPResponse, static_file, hook, response
 from views.usuario import usuario_view
+from views.estacion import estacion_view
 
 app = Bottle()
 
@@ -29,7 +30,8 @@ def send_static(filename):
 
 if __name__ == '__main__':
 	app.mount('/usuario', usuario_view)
+	app.mount('/estacion', estacion_view)
 	#app.run(host='localhost', port=3025, debug=True, reloader=True)
 	#app.run(host='192.168.1.54', port=3025, debug=True, reloader=True)#casa idic
-	app.run(host='192.168.1.54', port=3025, debug=False, reloader=True)#casa idic
+	app.run(host='192.168.1.54', port=3025, debug=False)#casa idic
 	#app.run(host='localhost', port=3041, debug=True)
