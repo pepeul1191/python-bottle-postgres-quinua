@@ -10,6 +10,10 @@ class Usuario < Sequel::Model(DB[:usuario])
 
 end
 
+class Estacion < Sequel::Model(DB[:inve_estacion])
+
+end
+
 set :bind, '192.168.1.54'
 set :port, 3025
 
@@ -20,16 +24,10 @@ before do
   headers['server'] = 'Ruby, Ubuntu'
 end
 
-post '/validar' do
-	response = HTTParty.post('http://192.168.1.54:3025/usuario/validar?usuario=r&contrasenia=1')
-	puts response.body, response.code, response.message, response.headers.inspect
-	response.body
-end
-
 post '/usuario/validar' do 
-	Usuario.where(:username => params['usuario'], :password => params['contrasenia']).count().to_s
+  Usuario.where(:username => params['usuario'], :password => params['contrasenia']).count().to_s
 end
 
-get '/usuario/listar' do 
-	Usuario.all().to_a.to_json
+get '/estacion/listar' do 
+  Estacion.all().to_a.to_json
 end
