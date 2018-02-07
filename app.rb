@@ -50,3 +50,13 @@ get '/estacion/detalle/:estacion_id' do
     WHERE IEI.ide_estacion = ' + params[:estacion_id]
   DB[query].all.to_json
 end
+
+get '/sensor/maximo_minimo_promedio_rango_fechas' do
+  #http://192.168.1.54:3025/sensor/maximo_minimo_promedio_rango_fechas?sensor_id=1&fecha_inicio=2017-08-18&fecha_fin=2017-08-21
+  query = "
+  SELECT to_char(fec_med, 'YYYY') || '/' || to_char(fec_med, 'MM') || '/' || to_char(fec_med, 'DD') AS dia, 
+  AVG(valor_med) AS promedio, MAX(valor_med) AS maximo, MIN(valor_med) AS minimo, COUNT(valor_med) AS mediciones 
+  FROM inve_instru_dato WHERE fec_med > " + params[:fecha_inicio] + " AND fec_med < " + params[:fecha_fin] + " AND ide_sensor = " + params[:sensor_id].to_s + "
+  GROUP BY dia;"
+  DB[query].all.to_json
+end
