@@ -25,6 +25,6 @@ if __name__ == '__main__':
 	app.mount('/estacion', estacion_view)
 	app.mount('/sensor', sensor_view)
 	#app.run(host='localhost', port=3025, debug=True, reloader=True)
-	app.run(host='192.168.1.54', port=3025, debug=True, reloader=True)#casa idic
-	#app.run(host='192.168.1.54', port=3025, debug=False)#casa idic
+	#app.run(host='192.168.1.54', port=3025, debug=True, reloader=True)#casa idic
+	app.run(host='192.168.1.54', port=3025, debug=False)#casa idic
 	#app.run(host='localhost', port=3041, debug=True)

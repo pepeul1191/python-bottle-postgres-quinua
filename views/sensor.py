@@ -7,6 +7,7 @@ from config.middleware import enable_cors
 
 sensor_view = Bottle()
 
+#http://192.168.1.54:3025/sensor/maximo_minimo_promedio_rango_fechas?sensor_id=1&fecha_inicio=2017-08-18&fecha_fin=2017-08-21
 @sensor_view.route('/maximo_minimo_promedio_rango_fechas', method='GET')
 @enable_cors
 def maximo_minimo_promedio_rango_fechas():

@@ -48,7 +48,13 @@ get '/estacion/detalle/:estacion_id' do
     INNER JOIN inve_instru II ON II.ide_sensor = IEI.ide_sensor 
     INNER JOIN mae_tablatipo_tipo MTT ON MTT.ide_tipo = II.fk_tipo_unidad_medida 
     WHERE IEI.ide_estacion = ' + params[:estacion_id]
-  DB[query].all.to_json
+  rs = DB[query].all
+  rpta = []
+  rs.each do |r|
+    r[:ide_sensor] = r[:ide_sensor].to_i
+    rpta.push(r)
+  end
+  rpta.to_json
 end
 
 get '/sensor/maximo_minimo_promedio_rango_fechas' do
@@ -56,7 +62,7 @@ get '/sensor/maximo_minimo_promedio_rango_fechas' do
   query = "
   SELECT to_char(fec_med, 'YYYY') || '/' || to_char(fec_med, 'MM') || '/' || to_char(fec_med, 'DD') AS dia, 
   AVG(valor_med) AS promedio, MAX(valor_med) AS maximo, MIN(valor_med) AS minimo, COUNT(valor_med) AS mediciones 
-  FROM inve_instru_dato WHERE fec_med > " + params[:fecha_inicio] + " AND fec_med < " + params[:fecha_fin] + " AND ide_sensor = " + params[:sensor_id].to_s + "
+  FROM inve_instru_dato WHERE fec_med > '" + params[:fecha_inicio] + "' AND fec_med < '" + params[:fecha_fin] + "' AND ide_sensor = " + params[:sensor_id].to_s + "
   GROUP BY dia;"
   DB[query].all.to_json
 end
