@@ -107,3 +107,19 @@ get '/sensor/maximo_minimo_rango_fechas' do
   end
   rpta.to_json
 end
+
+get '/sensor/rango_tiempo_dia' do
+  #http://192.168.1.54:3025/sensor/rango_tiempo_dia?dia_medicion=2017-08-18&sensor_id=3&hora_inicio=00:00&hora_fin=00:14 
+  query = "
+  SELECT to_char(fec_med, 'HH') || ':' || to_char(fec_med, 'MI') || ':' || to_char(fec_med, 'ss') AS momento, 
+  valor_med AS dato 
+  FROM inve_instru_dato WHERE fec_med > '" + params[:dia_medicion] + " " + params[:hora_inicio] + "' " +
+  " AND fec_med < '" + params[:dia_medicion] + " " + params[:hora_fin] + "' AND ide_sensor = " + params[:sensor_id].to_s
+  rs = DB[query].all
+  rpta = []
+  rs.each do |r|
+    r[:dato] = r[:dato].to_f
+    rpta.push(r)
+  end
+  rpta.to_json
+end
